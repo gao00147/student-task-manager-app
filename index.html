@@ -69,6 +69,13 @@
         <button type="button" class="tab" data-filter="completed" role="tab" aria-selected="false">Completed (1)</button>
       </div>
 
+      <div class="priority-filter" id="priorityFilterBar" role="tablist" aria-label="Filter by priority">
+        <button type="button" class="pf active" data-priority="all" role="tab" aria-selected="true">All priorities</button>
+        <button type="button" class="pf" data-priority="high" role="tab" aria-selected="false"><span class="pf-dot high"></span>High</button>
+        <button type="button" class="pf" data-priority="medium" role="tab" aria-selected="false"><span class="pf-dot medium"></span>Medium</button>
+        <button type="button" class="pf" data-priority="low" role="tab" aria-selected="false"><span class="pf-dot low"></span>Low</button>
+      </div>
+
       <ul class="list" id="taskList">
         <li class="item p-high" data-id="1">
           <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>

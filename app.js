@@ -29,6 +29,7 @@
 
   let tasks = loadTasks();
   let statusFilter = 'all'; // all | incomplete | completed
+  let priorityFilter = 'all'; // all | high | medium | low
   let editingId = null;
 
   const els = {
@@ -41,6 +42,7 @@
     list: document.getElementById('taskList'),
     emptyState: document.getElementById('emptyState'),
     tabs: document.getElementById('filterTabs'),
+    priorityBar: document.getElementById('priorityFilterBar'),
     dialogOverlay: document.getElementById('confirmOverlay'),
     dialogBody: document.getElementById('dialogBody'),
     dialogCancel: document.getElementById('dialogCancel'),
@@ -128,6 +130,7 @@
     let list = tasks.slice();
     if(statusFilter === 'incomplete') list = list.filter(t => !t.completed);
     if(statusFilter === 'completed') list = list.filter(t => t.completed);
+    if(priorityFilter !== 'all') list = list.filter(t => t.priority === priorityFilter);
     // auto-sort by priority (high → low), stable within same priority
     list.sort((a, b) => PRIORITY_RANK[a.priority] - PRIORITY_RANK[b.priority]);
     return list;
@@ -207,6 +210,12 @@
       tab.setAttribute('aria-selected', String(isActive));
     });
 
+    els.priorityBar.querySelectorAll('.pf').forEach(btn => {
+      const isActive = btn.dataset.priority === priorityFilter;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+
     saveTasks();
   }
 
@@ -238,6 +247,13 @@
     const btn = e.target.closest('.tab');
     if(!btn) return;
     statusFilter = btn.dataset.filter;
+    render();
+  });
+
+  els.priorityBar.addEventListener('click', e => {
+    const btn = e.target.closest('.pf');
+    if(!btn) return;
+    priorityFilter = btn.dataset.priority;
     render();
   });
 
