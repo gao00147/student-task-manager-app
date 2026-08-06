@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Task Manager</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header class="head">
+        <div class="brand">
+          <div class="mark">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5L8 14.5L16 5.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="brand-text">
+            <h1>Student Task Manager</h1>
+            <p>Assignments, due dates, and priorities in one place.</p>
+          </div>
+        </div>
+        <div class="today-badge">Today<b id="todayLabel">Wed, Aug 5</b></div>
+      </header>
+
+      <ul class="stats" aria-label="Task summary">
+        <li class="stat"><div class="n" id="statTotal">5</div><div class="l">Total</div></li>
+        <li class="stat"><div class="n" id="statCompleted">1</div><div class="l">Completed</div></li>
+        <li class="stat overdue"><div class="n" id="statOverdue">1</div><div class="l">Overdue</div></li>
+      </ul>
+
+      <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+        <div class="progress-label" id="progressLabel">1 of 5 completed</div>
+      </div>
+
+      <form class="form-panel" id="taskForm">
+        <div class="form-grid">
+          <div class="fld name">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h12M2 3.5h12M2 12.5h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input type="text" id="taskName" name="taskName" placeholder="Task name…" aria-label="Task name" required>
+          </div>
+          <div class="fld date">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 6.5h12M5 1.5v3M11 1.5v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <input type="date" id="taskDate" name="taskDate" aria-label="Due date">
+          </div>
+          <div class="fld priority">
+            <span class="dot medium" id="priorityDot" aria-hidden="true"></span>
+            <select id="taskPriority" name="taskPriority" aria-label="Priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+            <span class="caret" aria-hidden="true">▾</span>
+          </div>
+        </div>
+        <div class="notes-fld">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h10a1 1 0 0 1 1 1V13l-3 2H3.5a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 8.5h6M5 11h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <textarea id="taskNotes" name="taskNotes" placeholder="Notes (optional)…" rows="1" aria-label="Notes"></textarea>
+        </div>
+        <button type="submit" class="add-btn">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Add task
+        </button>
+      </form>
+
+      <div class="tabs" id="filterTabs" role="tablist" aria-label="Filter tasks">
+        <button type="button" class="tab active" data-filter="all" role="tab" aria-selected="true">All (5)</button>
+        <button type="button" class="tab" data-filter="incomplete" role="tab" aria-selected="false">Incomplete (4)</button>
+        <button type="button" class="tab" data-filter="completed" role="tab" aria-selected="false">Completed (1)</button>
+      </div>
+
+      <ul class="list" id="taskList">
+        <li class="item p-high" data-id="1">
+          <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>
+          <button type="button" class="chk" role="checkbox" aria-checked="false" aria-label="Mark complete"></button>
+          <div class="item-body">
+            <div class="item-top"><span class="item-name">Math Assignment 3 — Ch. 6 problems</span></div>
+            <div class="item-notes">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h10a1 1 0 0 1 1 1V13l-3 2H3.5a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3"/></svg>
+              Bring calculator + formula sheet
+            </div>
+            <div class="item-meta">
+              <span class="chip date">Due Aug 6</span>
+              <span class="chip p-high">High</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button type="button" class="icon-btn" aria-label="Edit task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5 13.5l-3 .5.5-3L11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="icon-btn danger" aria-label="Delete task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          </div>
+        </li>
+
+        <li class="item p-medium" data-id="2">
+          <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>
+          <button type="button" class="chk" role="checkbox" aria-checked="false" aria-label="Mark complete"></button>
+          <div class="item-body">
+            <div class="item-top"><span class="item-name">Group Project Meeting Notes</span></div>
+            <div class="item-notes">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h10a1 1 0 0 1 1 1V13l-3 2H3.5a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3"/></svg>
+              Confirm room booking with Priya
+            </div>
+            <div class="item-meta">
+              <span class="chip date">Due Aug 9</span>
+              <span class="chip p-medium">Medium</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button type="button" class="icon-btn" aria-label="Edit task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5 13.5l-3 .5.5-3L11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="icon-btn danger" aria-label="Delete task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          </div>
+        </li>
+
+        <li class="item p-medium" data-id="3">
+          <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>
+          <button type="button" class="chk" role="checkbox" aria-checked="false" aria-label="Mark complete"></button>
+          <div class="item-body">
+            <div class="item-top"><span class="item-name">Read Chapter 5 — Biology</span></div>
+            <div class="item-meta">
+              <span class="chip date">Due Aug 7</span>
+              <span class="chip p-medium">Medium</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button type="button" class="icon-btn" aria-label="Edit task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5 13.5l-3 .5.5-3L11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="icon-btn danger" aria-label="Delete task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          </div>
+        </li>
+
+        <li class="item p-low" data-id="4">
+          <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>
+          <button type="button" class="chk" role="checkbox" aria-checked="false" aria-label="Mark complete"></button>
+          <div class="item-body">
+            <div class="item-top"><span class="item-name">Submit Lab Report 2</span></div>
+            <div class="item-meta">
+              <span class="chip overdue">Overdue · Aug 3</span>
+              <span class="chip p-low">Low</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button type="button" class="icon-btn" aria-label="Edit task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5 13.5l-3 .5.5-3L11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="icon-btn danger" aria-label="Delete task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          </div>
+        </li>
+
+        <li class="item p-high done" data-id="5">
+          <button type="button" class="drag-handle" aria-label="Reorder task"><span></span><span></span><span></span></button>
+          <button type="button" class="chk on" role="checkbox" aria-checked="true" aria-label="Mark incomplete">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="item-body">
+            <div class="item-top"><span class="item-name strike">Register for Fall Electives</span></div>
+            <div class="item-notes">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h10a1 1 0 0 1 1 1V13l-3 2H3.5a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3"/></svg>
+              Check prerequisite for MATH204
+            </div>
+            <div class="item-meta">
+              <span class="chip date">Due Aug 1</span>
+              <span class="chip p-high">High</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <button type="button" class="icon-btn" aria-label="Edit task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5 13.5l-3 .5.5-3L11 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="icon-btn danger" aria-label="Delete task"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <p class="lead">No tasks yet</p>
+        <p>Add your first task above to get started.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-overlay" id="confirmOverlay" hidden>
+    <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <p id="dialogTitle" class="dialog-title">Delete this task?</p>
+      <p class="dialog-body" id="dialogBody"></p>
+      <div class="dialog-actions">
+        <button type="button" class="dialog-btn cancel" id="dialogCancel">Cancel</button>
+        <button type="button" class="dialog-btn danger" id="dialogConfirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
