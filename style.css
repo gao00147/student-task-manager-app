@@ -192,10 +192,12 @@ button{font-family:inherit; cursor:pointer;}
 
 .item-actions{display:flex; gap:4px; flex:0 0 auto; margin-left:auto;}
 .icon-btn{
-  width:26px; height:26px; border-radius:7px; border:1px solid transparent; background:none;
-  display:flex; align-items:center; justify-content:center; color:var(--ink-faint); cursor:pointer;
+  width:32px; height:32px; border-radius:8px; border:1px solid var(--border); background:var(--surface-2);
+  display:flex; align-items:center; justify-content:center; color:var(--ink-mute); cursor:pointer;
 }
-.icon-btn:hover{background:var(--surface-2); border-color:var(--border); color:var(--ink-mute);}
+.icon-btn svg{width:15px; height:15px;}
+.icon-btn:hover{background:var(--border); color:var(--ink);}
+.icon-btn.danger{color:var(--high);}
 .icon-btn.danger:hover{background:var(--high-soft); border-color:var(--high-border); color:var(--high);}
 
 /* empty state */
