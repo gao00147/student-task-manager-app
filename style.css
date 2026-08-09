@@ -49,11 +49,11 @@ button{font-family:inherit; cursor:pointer;}
   border:1px solid var(--border);
   border-radius:18px;
   box-shadow:var(--shadow);
-  padding:28px 28px 30px;
+  padding:40px 40px 44px;
 }
 
 /* header */
-.head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px;}
+.head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:30px;}
 .brand{display:flex; align-items:center; gap:12px;}
 .mark{
   width:38px; height:38px; border-radius:11px; background:var(--accent); flex:0 0 auto;
@@ -73,16 +73,16 @@ button{font-family:inherit; cursor:pointer;}
 .today-badge b{display:block; color:var(--ink); font-size:13px; font-weight:700;}
 
 /* stat tiles */
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; list-style:none; margin-block:0 16px; padding:0;}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; list-style:none; margin-block:0 24px; padding:0;}
 .stat{
   border:1px solid var(--border); background:var(--surface-2); border-radius:12px;
-  padding:11px 12px;
+  padding:16px 18px;
 }
 .stat .n{font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1;}
 .stat .l{font-size:11px; color:var(--ink-mute); margin-top:4px; text-transform:uppercase; letter-spacing:.04em;}
 .stat.overdue .n{color:var(--overdue);}
 
-.progress-row{display:flex; align-items:center; gap:10px; margin-bottom:24px;}
+.progress-row{display:flex; align-items:center; gap:10px; margin-bottom:32px;}
 .progress-track{flex:1; height:7px; background:var(--surface-2); border:1px solid var(--border); border-radius:5px; overflow:hidden;}
 .progress-fill{height:100%; background:var(--accent); border-radius:5px 0 0 5px;}
 .progress-label{font-size:11.5px; color:var(--ink-mute); white-space:nowrap; font-variant-numeric:tabular-nums;}
@@ -90,7 +90,7 @@ button{font-family:inherit; cursor:pointer;}
 /* form */
 .form-panel{
   background:var(--accent-soft); border:1px solid var(--accent-soft-border);
-  border-radius:14px; padding:14px; margin-bottom:22px;
+  border-radius:14px; padding:22px; margin-bottom:30px;
 }
 .form-grid{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;}
 .fld{
@@ -130,7 +130,7 @@ button{font-family:inherit; cursor:pointer;}
 .add-btn:hover{filter:brightness(1.06);}
 
 /* tabs */
-.tabs{display:flex; gap:6px; margin-bottom:14px;}
+.tabs{display:flex; gap:6px; margin-bottom:18px;}
 .tab{
   border:1px solid var(--border); background:var(--surface-2); color:var(--ink-mute);
   border-radius:9px; padding:7px 13px; font-size:12.5px; font-weight:600;
@@ -138,7 +138,7 @@ button{font-family:inherit; cursor:pointer;}
 }
 .tab.active{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
 
-.priority-filter{display:flex; gap:5px; flex-wrap:wrap; margin-bottom:14px;}
+.priority-filter{display:flex; gap:5px; flex-wrap:wrap; margin-bottom:22px;}
 .pf{
   display:inline-flex; align-items:center; gap:5px;
   border:1px solid var(--border); background:none; color:var(--ink-mute);
@@ -151,11 +151,11 @@ button{font-family:inherit; cursor:pointer;}
 .pf.active{background:var(--surface-2); border-color:var(--ink-mute); color:var(--ink);}
 
 /* list */
-.list{display:flex; flex-direction:column; gap:9px; list-style:none; margin:0; padding:0;}
+.list{display:flex; flex-direction:column; gap:13px; list-style:none; margin:0; padding:0;}
 .item{
   position:relative; display:flex; gap:9px; align-items:flex-start;
   background:var(--surface); border:1px solid var(--border); border-radius:12px;
-  padding:13px 13px 13px 6px;
+  padding:19px 19px 19px 8px;
 }
 .item.done{background:var(--surface-2);}
 .drag-handle{
