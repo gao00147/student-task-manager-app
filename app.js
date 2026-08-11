@@ -1,12 +1,20 @@
 (() => {
   const STORAGE_KEY = 'studentTaskManager.tasks';
 
+  function offsetDateISO(days){
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // Dates are relative to today so the seed demo always looks balanced —
+  // some upcoming, one overdue, one completed — no matter when it's opened.
   const seedTasks = () => ([
-    { id: cryptoId(), name: 'Math Assignment 3 — Ch. 6 problems', date: '2026-08-06', priority: 'high', notes: 'Bring calculator + formula sheet', completed: false },
-    { id: cryptoId(), name: 'Group Project Meeting Notes', date: '2026-08-09', priority: 'medium', notes: 'Confirm room booking with Priya', completed: false },
-    { id: cryptoId(), name: 'Read Chapter 5 — Biology', date: '2026-08-07', priority: 'medium', notes: '', completed: false },
-    { id: cryptoId(), name: 'Submit Lab Report 2', date: '2026-08-03', priority: 'low', notes: '', completed: false },
-    { id: cryptoId(), name: 'Register for Fall Electives', date: '2026-08-01', priority: 'high', notes: 'Check prerequisite for MATH204', completed: true },
+    { id: cryptoId(), name: 'Math Assignment 3 — Ch. 6 problems', date: offsetDateISO(2), priority: 'high', notes: 'Bring calculator + formula sheet', completed: false },
+    { id: cryptoId(), name: 'Group Project Meeting Notes', date: offsetDateISO(5), priority: 'medium', notes: 'Confirm room booking with Priya', completed: false },
+    { id: cryptoId(), name: 'Read Chapter 5 — Biology', date: offsetDateISO(1), priority: 'medium', notes: '', completed: false },
+    { id: cryptoId(), name: 'Submit Lab Report 2', date: offsetDateISO(-3), priority: 'low', notes: '', completed: false },
+    { id: cryptoId(), name: 'Register for Fall Electives', date: offsetDateISO(-7), priority: 'high', notes: 'Check prerequisite for MATH204', completed: true },
   ]);
 
   function cryptoId(){
@@ -147,7 +155,7 @@
     if(editingId === task.id){
       return `
         <li class="item p-${task.priority} editing" data-id="${task.id}">
-          ${iconDrag() ? `<button type="button" class="drag-handle" aria-label="Reorder task">${iconDrag()}</button>` : ''}
+          <button type="button" class="drag-handle" aria-label="Reorder task">${iconDrag()}</button>
           <button type="button" class="chk${task.completed ? ' on' : ''}" role="checkbox" aria-checked="${task.completed}" aria-label="Mark ${task.completed ? 'incomplete' : 'complete'}">${task.completed ? iconCheck() : ''}</button>
           <div class="item-body">
             <div class="fld name" style="margin-bottom:6px;">
