@@ -6,7 +6,7 @@ Built for the Web Development with JavaScript final project (Algonquin College, 
 
 ## Project brief
 
-College students juggling assignments, projects, quizzes, and personal tasks often lose track of what's due first. This app lets a student add a task, set a due date, priority, and optional notes, mark it complete, edit it, or delete it — all in one clean dashboard-style view that works on desktop, tablet, and mobile.
+College students juggling assignments, projects, quizzes, and personal tasks often lose track of what's due first. This app lets a student add a task, set a due date, priority, and optional notes, mark it complete, edit it, or delete it, all in one clean dashboard-style view that works on desktop, tablet, and mobile.
 
 ## Features
 
